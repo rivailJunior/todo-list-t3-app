@@ -4,26 +4,7 @@ import { ListContext } from "../../context/listContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, FormSchema, IInputUser } from "./usersTypes";
-
-const BASE_URL_API = "http://localhost:3000/api/users";
-
-const createUser = async (data: FormSchema["create"]) => {
-  const response = await fetch(BASE_URL_API, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-type": "application/json;charset=UTF-8" },
-  });
-  return response;
-};
-
-const updateUser = async (data: FormSchema["update"]) => {
-  const response = await fetch(BASE_URL_API, {
-    method: "PUT",
-    body: JSON.stringify(data),
-    headers: { "Content-type": "application/json;charset=UTF-8" },
-  });
-  return response;
-};
+import { createUser, updateUser } from "~/service/usersService";
 
 const PRIMARY_BUTTON =
   "bg-blue-500 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-400";

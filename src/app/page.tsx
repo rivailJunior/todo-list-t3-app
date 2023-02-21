@@ -1,12 +1,6 @@
-import { useRouter } from "next/router";
 import { InputUser, ListUsers } from "~/components/users";
+import { getUsers } from "~/service/usersService";
 
-const BASE_URL_API = "http://localhost:3000/api/users";
-
-const getUsers = async () => {
-  const data = await fetch(BASE_URL_API);
-  return data.json();
-};
 const Home = async () => {
   const data = await getUsers();
   return (

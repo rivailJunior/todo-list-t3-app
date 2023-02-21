@@ -3,18 +3,9 @@
 import { Users } from "@prisma/client";
 import { useContext } from "react";
 import { ListContext } from "~/context/listContext";
+import { deleteUser } from "~/service/usersService";
 import { Modal } from "../shared";
 import { IListUsers } from "./usersTypes";
-
-const BASE_URL_API = "http://localhost:3000/api/users";
-const deleteUser = async (id: string) => {
-  const response = await fetch(BASE_URL_API, {
-    method: "DELETE",
-    body: JSON.stringify({ id }),
-    headers: { "Content-type": "application/json;charset=UTF-8" },
-  });
-  return response;
-};
 
 export function ListUsers({ data, isLoading }: IListUsers) {
   const { setOpen, open, setUser, user } = useContext(ListContext);
