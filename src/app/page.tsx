@@ -2,11 +2,11 @@ import { InputUser, ListUsers } from "~/components/users";
 import { getUsers } from "~/service/usersService";
 
 const Home = async () => {
-  const data = await getUsers();
+  const users = await getUsers();
   return (
     <div className="container w-2/4">
       <InputUser isLoading={false} />
-      <ListUsers isLoading={false} data={data?.data} />
+      <ListUsers isLoading={false} data={users} />
     </div>
   );
 };

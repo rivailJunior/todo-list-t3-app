@@ -6,9 +6,8 @@ export default async function Handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    // get all users
     const data = await prisma.users.findMany();
-    return res.status(200).json({ data });
+    return res.status(200).json(data);
   }
   if (req.method === "POST") {
     const newUser = {

@@ -1,5 +1,5 @@
-import { Users } from "@prisma/client";
 import * as z from "zod";
+import { usersSchema } from "~/service/zodFetcher";
 
 export const formSchema = z.object({
   name: z
@@ -15,7 +15,7 @@ export interface FormSchema {
 }
 
 export interface IListUsers {
-  data: Users[] | undefined;
+  data: z.infer<typeof usersSchema> | undefined;
   isLoading: boolean;
 }
 

@@ -2461,6 +2461,11 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
+zod-fetch@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/zod-fetch/-/zod-fetch-0.1.0.tgz#aabb138503c2ed1c9b7d654bd271b6875c5162da"
+  integrity sha512-+1M/rSG7ogaewYhaPhoZWAG19H3cjNyiM/4xVOYyYUYrSXlkeCXQauMtEnCmC6wSpJlRiV4G3vWOxeC3148O2A==
+
 zod@^3.20.2:
   version "3.20.6"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.20.6.tgz#2f2f08ff81291d47d99e86140fedb4e0db08361a"
