@@ -1,17 +1,17 @@
 "use client";
-import React, { useContext, useEffect } from "react";
-import { ListContext } from "../../context/listContext";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema, FormSchema, IInputUser } from "./usersTypes";
+import { useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { createUser, updateUser } from "~/service/usersService";
+import { ListContext } from "../../context/listContext";
+import { formSchema, FormSchema } from "./usersTypes";
 
 const PRIMARY_BUTTON =
   "bg-blue-500 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-400";
-const DISABLED_BUTTON =
-  "bg-gray-200 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-100 text-black";
+// const DISABLED_BUTTON =
+//   "bg-gray-200 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-100 text-black";
 
-export function InputUser({ isLoading }: IInputUser) {
+export function InputUser() {
   const {
     handleSubmit,
     register,
@@ -30,12 +30,13 @@ export function InputUser({ isLoading }: IInputUser) {
     }
   }, [user]);
 
-  const handleCreateUser = (data: FormSchema["create"]) => {
+  const handleCreateUser = async (data: FormSchema["create"]) => {
     try {
-      createUser({ name: data.name });
-      window.location.reload();
+      const response = await createUser({ name: data.name });
+      console.log("response", response);
+      // window.location.assign("/");
     } catch (error) {
-      console.error("error on create", error);
+      console.error("error => ", error);
     } finally {
       resetForm();
       setUser(null);
@@ -72,7 +73,7 @@ export function InputUser({ isLoading }: IInputUser) {
             id="inputUser"
             type="text"
             {...register("name")}
-            placeholder="Type your name here"
+            placeholder="Type the name here"
             className="block w-full rounded-lg border border-stone-400 p-2 text-lg font-light capitalize text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-lg"
           />
           {errors.name?.message && (
@@ -81,11 +82,7 @@ export function InputUser({ isLoading }: IInputUser) {
             </p>
           )}
           <div className="flex justify-end ">
-            <button
-              disabled={isLoading}
-              type="submit"
-              className={isLoading ? DISABLED_BUTTON : PRIMARY_BUTTON}
-            >
+            <button type="submit" className={PRIMARY_BUTTON}>
               {user ? "Update" : "Save"}
             </button>
           </div>

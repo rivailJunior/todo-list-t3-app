@@ -7,7 +7,7 @@ import { deleteUser } from "~/service/usersService";
 import { Modal } from "../shared";
 import { IListUsers } from "./usersTypes";
 
-export function ListUsers({ data, isLoading }: IListUsers) {
+export function ListUsers({ data }: IListUsers) {
   const { setOpen, open, setUser, user } = useContext(ListContext);
 
   const handleOnDeleteUser = (user: Users) => {
@@ -16,9 +16,9 @@ export function ListUsers({ data, isLoading }: IListUsers) {
   };
 
   const handleDelete = async () => {
-    setUser(null);
     setOpen(false);
     await deleteUser(user?.id as string);
+    setUser(null);
     window.location.reload();
   };
 
@@ -97,11 +97,11 @@ export function ListUsers({ data, isLoading }: IListUsers) {
               </li>
             );
           })}
-          {isLoading && (
+          {/* {isLoading && (
             <li className="mt-2 border-b border-solid border-gray-500 bg-white p-1 text-lg font-light text-gray-700">
               Loading...
             </li>
-          )}
+          )} */}
         </ul>
       </div>
     </>

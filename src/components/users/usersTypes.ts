@@ -16,9 +16,4 @@ export interface FormSchema {
 
 export interface IListUsers {
   data: z.infer<typeof usersSchema> | undefined;
-  isLoading: boolean;
-}
-
-export interface IInputUser {
-  isLoading: boolean;
 }

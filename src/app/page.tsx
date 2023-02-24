@@ -5,8 +5,8 @@ const Home = async () => {
   const users = await getUsers();
   return (
     <div className="container w-2/4">
-      <InputUser isLoading={false} />
-      <ListUsers isLoading={false} data={users} />
+      <InputUser />
+      <ListUsers data={users} />
     </div>
   );
 };

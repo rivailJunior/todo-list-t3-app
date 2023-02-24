@@ -14,7 +14,7 @@ export default async function Handler(
       name: req.body.name,
     };
     const data = await prisma.users.create({ data: newUser });
-    return res.status(201).json({ data });
+    return res.status(201).json(data);
   }
   if (req.method === "PUT") {
     const newUser = {
