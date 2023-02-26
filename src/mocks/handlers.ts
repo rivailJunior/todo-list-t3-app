@@ -15,6 +15,9 @@ const handlers = [
   rest.get("/api/users", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json<Users[]>([mockData]));
   }),
+  rest.put("/api/users", (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({}));
+  }),
 ];
 
 export { handlers };

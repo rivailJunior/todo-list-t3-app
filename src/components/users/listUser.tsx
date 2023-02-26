@@ -1,16 +1,14 @@
 "use client";
 
-import { Users } from "@prisma/client";
 import { useContext } from "react";
 import { ListContext } from "~/context/listContext";
 import { deleteUser } from "~/service/usersService";
 import { Modal } from "../shared";
-import { IListUsers } from "./usersTypes";
-
+import { FormSchema, IListUsers } from "./usersTypes";
 export function ListUsers({ data }: IListUsers) {
   const { setOpen, open, setUser, user } = useContext(ListContext);
 
-  const handleOnDeleteUser = (user: Users) => {
+  const handleOnDeleteUser = (user: FormSchema["create"]) => {
     setUser(user);
     setOpen(true);
   };
@@ -22,15 +20,20 @@ export function ListUsers({ data }: IListUsers) {
     window.location.reload();
   };
 
+  const handleCloseModal = () => {
+    setUser(null);
+    setOpen(false);
+  };
+
   return (
     <>
       <Modal
-        setOpen={() => setOpen(false)}
+        setOpen={handleCloseModal}
         open={open}
         title={`Deleting User`}
         subTitle={
           <div>
-            Are you sure, do you want to delete user:
+            Are you sure do you want to delete user:
             <span className="ml-1 font-bold capitalize text-red-400">
               {user?.name}?
             </span>
@@ -51,10 +54,13 @@ export function ListUsers({ data }: IListUsers) {
                   <div className="capitalize">{user.name}</div>
                   <div>
                     <button
+                      data-testid="action_edit"
                       name="action_edit"
                       value={user.name}
                       className="text-blue-600"
-                      onClick={() => setUser(user)}
+                      onClick={() => {
+                        setUser(user);
+                      }}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +78,7 @@ export function ListUsers({ data }: IListUsers) {
                       </svg>
                     </button>
                     <button
+                      data-testid="action_delete"
                       name="action_delete"
                       value={user.name}
                       className="ml-3 text-red-600"

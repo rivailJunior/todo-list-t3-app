@@ -1,14 +1,15 @@
-import userEvent from "@testing-library/user-event";
 import { describe, test } from "vitest";
-import { InputUser } from "~/components/users";
-import { render, screen } from "./testUtils";
-const user = userEvent.setup();
+import { InputUser, ListUsers } from "~/components/users";
+import { mockUserData } from "./mockData/users";
+import { render, screen, UserEvt } from "./testUtils";
 
-const mockResponse = {
-  createdAt: new Date("2023-01-22T23:13:24.594Z"),
-  id: "f8224ace-8832-49d3-87d9-1c77a53177f2",
-  name: "Jhon Doe",
-  updatedAt: new Date("2023-01-22T23:13:24.594Z"),
+const PageHelperComponent = () => {
+  return (
+    <>
+      <InputUser />
+      <ListUsers data={mockUserData} />
+    </>
+  );
 };
 
 describe("Input User", () => {
@@ -21,17 +22,30 @@ describe("Input User", () => {
     expect(screen.getByText(/Save/i)).toBeInTheDocument();
   });
 
-  test("should call save function properly", async () => {
-    // const prismaMock = mockDeep<PrismaClient>();
-    // await prismaMock.users.create.mockResolvedValue(mockResponse);
-
-    render(<InputUser />, {});
+  test("should create new user properly", async () => {
+    render(<InputUser />);
     const btnSave = screen.getByRole("button", { name: /Save/i });
     expect(btnSave).toBeInTheDocument();
     const inputText = screen.getByRole("textbox", { name: /name/i });
     expect(inputText).toBeInTheDocument();
-    await user.type(inputText, "Jhon Doe");
-    await user.click(btnSave);
+    await UserEvt.type(inputText, "Jhon Doe");
+    await UserEvt.click(btnSave);
+    expect(await screen.findByRole("textbox", { name: /name/i })).toHaveValue(
+      ""
+    );
+  });
+
+  test("should update user properly", async () => {
+    render(<PageHelperComponent />);
+    const btnEdit: [] | any = screen.getAllByTestId(/action_edit/i);
+    expect(btnEdit).toHaveLength(2);
+    await UserEvt.click(btnEdit[0]);
+    const inputUser = await screen.findByRole("textbox", { name: /name/i });
+    expect(inputUser).toHaveValue("User 10");
+    const btnUpdate = await screen.findByRole("button", { name: /update/i });
+    expect(btnUpdate).toBeInTheDocument();
+    await UserEvt.type(inputUser, "User 12");
+    await UserEvt.click(btnUpdate);
     expect(await screen.findByRole("textbox", { name: /name/i })).toHaveValue(
       ""
     );

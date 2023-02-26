@@ -32,9 +32,8 @@ export function InputUser() {
 
   const handleCreateUser = async (data: FormSchema["create"]) => {
     try {
-      const response = await createUser({ name: data.name });
-      console.log("response", response);
-      // window.location.assign("/");
+      await createUser({ name: data.name });
+      window.location.assign("/");
     } catch (error) {
       console.error("error => ", error);
     } finally {
@@ -46,7 +45,7 @@ export function InputUser() {
   const handleUpdateUser = (data: FormSchema["create"]) => {
     try {
       updateUser({ id: user?.id as string, name: data.name });
-      window.location.reload();
+      window.location.assign("/");
     } catch (error) {
       console.error("error on update", error);
     } finally {

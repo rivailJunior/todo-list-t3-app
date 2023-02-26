@@ -1,6 +1,7 @@
 import ListProvider from "~/context/listContext";
 import "~/styles/globals.css";
 
+// if need to get the request from the mock
 // if (process.env.NEXT_PUBLIC_API_MOCKING === "true") {
 //   console.log("is to use from mock");
 //   import("../mocks").then(({ setupMocks }) => {
