@@ -17,7 +17,8 @@ export function ListUsers({ data }: IListUsers) {
     setOpen(false);
     await deleteUser(user?.id as string);
     setUser(null);
-    window.location.reload();
+    //TODO: improve the way to update page to show list of users
+    window.location.assign("/");
   };
 
   const handleCloseModal = () => {

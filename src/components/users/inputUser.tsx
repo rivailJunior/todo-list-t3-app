@@ -33,6 +33,7 @@ export function InputUser() {
   const handleCreateUser = async (data: FormSchema["create"]) => {
     try {
       await createUser({ name: data.name });
+      //TODO: improve the way to update page to show new users
       window.location.assign("/");
     } catch (error) {
       console.error("error => ", error);
@@ -45,6 +46,7 @@ export function InputUser() {
   const handleUpdateUser = (data: FormSchema["create"]) => {
     try {
       updateUser({ id: user?.id as string, name: data.name });
+      //TODO: improve the way to update page to show users updated
       window.location.assign("/");
     } catch (error) {
       console.error("error on update", error);
